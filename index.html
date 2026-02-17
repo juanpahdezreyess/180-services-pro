@@ -12,12 +12,12 @@
       --text:#111827;
       --muted:#6b7280;
       --line:#e5e7eb;
-      --card:#f9fafb;
-      --brand:#10b981;   /* verde (similar vibe) */
+      --soft:#f9fafb;
+      --brand:#10b981;   /* verde */
       --brand2:#0ea5e9;  /* azul */
-      --shadow: 0 12px 30px rgba(17,24,39,.10);
+      --shadow: 0 14px 34px rgba(17,24,39,.10);
       --radius: 18px;
-      --max: 1100px;
+      --max: 1120px;
     }
 
     *{box-sizing:border-box}
@@ -25,14 +25,18 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background: var(--bg);
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(16,185,129,.10), transparent 60%),
+        radial-gradient(900px 520px at 90% 18%, rgba(14,165,233,.10), transparent 55%),
+        #fff;
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.6;
     }
     a{color:inherit; text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding: 18px 16px 70px;}
 
-    /* Top bar (similar simple header) */
+    .wrap{max-width:var(--max); margin:0 auto; padding: 18px 16px 80px;}
+
+    /* Header */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
       gap:12px;
@@ -48,7 +52,7 @@
       min-width: 220px;
     }
     .logo{
-      width:42px; height:42px; border-radius: 14px;
+      width:44px; height:44px; border-radius: 14px;
       background: linear-gradient(135deg, var(--brand), var(--brand2));
       display:grid; place-items:center;
       color:white; font-weight:900;
@@ -81,12 +85,14 @@
       font-size: 13px;
       cursor: pointer;
       user-select:none;
+      transition: transform .12s ease;
     }
     .btn.primary{
       border-color: rgba(16,185,129,.35);
       background: linear-gradient(135deg, rgba(16,185,129,.14), rgba(14,165,233,.12));
     }
     .btn:hover{transform: translateY(-1px)}
+
     .chip{
       display:inline-flex; align-items:center; gap:8px;
       border:1px solid var(--line);
@@ -95,6 +101,7 @@
       font-size:12px;
       color: var(--muted);
       background: #fff;
+      width: fit-content;
     }
     .dot{width:8px; height:8px; border-radius:999px; background: var(--brand)}
 
@@ -112,9 +119,10 @@
     .hero::before{
       content:"";
       position:absolute;
-      inset: -120px -140px auto auto;
-      width: 320px; height: 320px; border-radius: 999px;
-      background: radial-gradient(circle, rgba(16,185,129,.18), transparent 65%);
+      inset: -140px -160px auto auto;
+      width: 360px; height: 360px; border-radius: 999px;
+      background: radial-gradient(circle, rgba(16,185,129,.16), transparent 65%);
+      pointer-events:none;
     }
     .hero-grid{
       display:grid;
@@ -131,10 +139,10 @@
     .hero p{
       margin: 0 0 14px;
       color: var(--muted);
-      max-width: 62ch;
+      max-width: 66ch;
       font-size: 14px;
     }
-    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 8px}
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px}
     .pill{
       border:1px solid var(--line);
       background:#fff;
@@ -145,7 +153,7 @@
       display:inline-flex; align-items:center; gap:8px;
     }
 
-    /* Right CTA card */
+    /* CTA */
     .cta{
       border:1px solid var(--line);
       border-radius: var(--radius);
@@ -153,13 +161,27 @@
       box-shadow: var(--shadow);
       padding: 16px;
     }
-    .cta h3{margin:0 0 6px; font-size:14px}
+    .cta h3{margin:0 0 6px; font-size:15px}
     .cta p{margin:0 0 12px; font-size:13px; color: var(--muted)}
     .btnrow{display:flex; gap:10px; flex-wrap:wrap}
     .note{margin-top:10px; font-size:12px; color: var(--muted)}
+    .mini-list{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid; gap:8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .mini-list li{
+      border:1px dashed var(--line);
+      padding: 8px 10px;
+      border-radius: 14px;
+      background: var(--soft);
+    }
 
     /* Sections */
-    section{margin-top: 20px}
+    section{margin-top: 22px}
     .section-title{
       margin: 10px 4px 12px;
       display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
@@ -173,7 +195,7 @@
       gap: 12px;
     }
 
-    /* Service cards (like “Preescolar / Primaria / Guardería”) */
+    /* Service cards (más “amigables”) */
     .service{
       grid-column: span 4;
       border:1px solid var(--line);
@@ -181,26 +203,43 @@
       background:#fff;
       box-shadow: var(--shadow);
       overflow:hidden;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .service:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(17,24,39,.12);
     }
     .service .img{
-      height: 160px;
-      background:
-        radial-gradient(520px 240px at 10% 10%, rgba(16,185,129,.25), transparent 60%),
-        radial-gradient(420px 220px at 90% 30%, rgba(14,165,233,.22), transparent 60%),
-        #eef2ff;
+      height: 170px;
+      display:block;
+      object-fit: cover;
+      width: 100%;
+      background: #eef2ff;
     }
     .service .body{padding: 14px}
     .service h4{margin:0 0 8px; font-size:15px}
+    .service p{margin:0 0 10px; color: var(--muted); font-size: 13px}
     .service ul{
       margin:0;
       padding-left: 18px;
       color: var(--muted);
       font-size: 13px;
+      display:grid; gap:4px;
     }
     .service .foot{
       padding: 12px 14px 16px;
-      display:flex; justify-content:flex-start; align-items:center;
+      display:flex; justify-content:space-between; align-items:center;
       gap:10px;
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+    .tag{
+      font-size: 11px;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      background: var(--soft);
+      border-radius: 999px;
+      padding: 6px 8px;
     }
     .info{
       display:inline-flex; align-items:center; gap:8px;
@@ -210,9 +249,10 @@
       background: linear-gradient(135deg, rgba(16,185,129,.14), rgba(14,165,233,.10));
       font-size: 13px;
       cursor:pointer;
+      white-space: nowrap;
     }
 
-    /* About cards */
+    /* About */
     .about{
       grid-column: span 6;
       border:1px solid var(--line);
@@ -224,7 +264,7 @@
     .about h4{margin:0 0 6px; font-size:16px}
     .about p{margin:0; color:var(--muted); font-size:13px}
 
-    /* Simple gallery row */
+    /* “Confianza” (3 tiles) */
     .methods{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -235,21 +275,23 @@
       border-radius: var(--radius);
       background: #fff;
       box-shadow: var(--shadow);
-      overflow:hidden;
+      padding: 14px;
     }
-    .tile .img{
-      height: 140px;
-      background:
-        linear-gradient(135deg, rgba(16,185,129,.18), rgba(14,165,233,.14)),
-        #f3f4f6;
-    }
-    .tile .body{padding: 12px}
     .tile strong{display:block; font-size:14px}
     .tile small{color:var(--muted)}
+    .icon{
+      width:42px; height:42px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(16,185,129,.18), rgba(14,165,233,.14));
+      border: 1px solid rgba(229,231,235,.9);
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
 
     /* Footer */
     footer{
-      margin-top: 20px;
+      margin-top: 22px;
       border:1px solid var(--line);
       border-radius: var(--radius);
       background: #fff;
@@ -259,7 +301,7 @@
       font-size: 12px;
     }
 
-    /* Responsive */
+    /* Mobile */
     @media (max-width: 940px){
       .hero-grid{grid-template-columns: 1fr}
       .service{grid-column: span 6}
@@ -292,7 +334,7 @@
         <a href="#contacto">Contáctanos</a>
       </nav>
 
-      <a class="btn primary" href="#contacto">WhatsApp</a>
+      <a class="btn primary" href="#contacto">💬 WhatsApp</a>
     </header>
 
     <main>
@@ -301,33 +343,40 @@
         <div class="hero-grid">
           <div>
             <div class="chip"><span class="dot"></span> Seguridad · Conectividad · Soporte</div>
-            <h2>Infraestructura tecnológica <br/>para hogares y negocios</h2>
+            <h2>Soluciones en redes y seguridad<br/>para hogares y negocios</h2>
             <p>
-              Instalamos y damos mantenimiento a <b>REDES</b>, <b>CCTV</b>, <b>NVR</b>, <b>Cableado Estructurado</b>,
+              Instalación y mantenimiento de <b>REDES</b>, <b>CCTV</b>, <b>NVR</b>, <b>Cableado Estructurado</b>,
               <b>Voz y Datos</b>, <b>Fibra Óptica</b>, <b>Alarmas</b> y <b>Control de Acceso</b>.
+              Sin precios en la web: te orientamos según tu necesidad.
             </p>
 
             <div class="pillrow">
-              <div class="pill"><span class="dot"></span> Instalación profesional</div>
               <div class="pill"><span class="dot"></span> Trabajo limpio y ordenado</div>
-              <div class="pill"><span class="dot"></span> Configuración y soporte</div>
-              <div class="pill"><span class="dot"></span> Soluciones completas</div>
+              <div class="pill"><span class="dot"></span> Configuración profesional</div>
+              <div class="pill"><span class="dot"></span> Soporte y mantenimiento</div>
+              <div class="pill"><span class="dot"></span> Seguridad y confiabilidad</div>
             </div>
           </div>
 
           <aside class="cta" id="contacto">
             <h3>Contáctanos</h3>
-            <p>Resolvemos tu necesidad según tu espacio y objetivo (sin precios en la web).</p>
+            <p>Cuéntanos qué necesitas y te respondemos rápido.</p>
 
             <div class="btnrow">
-              <!-- Cambia el teléfono y correo por los reales -->
+              <!-- CAMBIA EL NÚMERO REAL -->
               <a class="btn primary" href="https://wa.me/5210000000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios.">💬 WhatsApp</a>
               <a class="btn" href="tel:+520000000000">📞 Llamar</a>
               <a class="btn" href="mailto:contacto@tudominio.com">✉️ Correo</a>
             </div>
 
+            <ul class="mini-list">
+              <li>✅ Visita y diagnóstico</li>
+              <li>✅ Instalación y configuración</li>
+              <li>✅ Mantenimiento y soporte</li>
+            </ul>
+
             <div class="note">
-              *Edita el link de WhatsApp: cambia <b>5210000000000</b> por tu número.
+              *Edita WhatsApp: cambia <b>5210000000000</b> por tu número (con lada).
             </div>
           </aside>
         </div>
@@ -336,79 +385,199 @@
       <!-- SERVICES -->
       <section id="servicios">
         <div class="section-title">
-          <h3>Conoce nuestros servicios</h3>
+          <h3>Nuestros servicios</h3>
           <span>Instalación · Configuración · Mantenimiento</span>
         </div>
 
         <div class="grid">
+
+          <!-- REDES -->
           <article class="service">
-            <div class="img" aria-hidden="true"></div>
+            <img class="img" alt="Redes y Wi-Fi" src="data:image/svg+xml;utf8,
+              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                <defs>
+                  <linearGradient id='g' x1='0' x2='1'>
+                    <stop offset='0' stop-color='%2310b981' stop-opacity='.22'/>
+                    <stop offset='1' stop-color='%230ea5e9' stop-opacity='.20'/>
+                  </linearGradient>
+                </defs>
+                <rect width='1200' height='700' fill='url(%23g)'/>
+                <circle cx='260' cy='330' r='120' fill='%230ea5e9' opacity='.18'/>
+                <circle cx='960' cy='180' r='170' fill='%2310b981' opacity='.16'/>
+                <g fill='none' stroke='%23111827' stroke-opacity='.35' stroke-width='14' stroke-linecap='round'>
+                  <path d='M300 430c60-70 140-70 200 0'/>
+                  <path d='M270 470c90-105 210-105 300 0'/>
+                  <path d='M240 520c120-140 280-140 400 0'/>
+                </g>
+                <g fill='%23111827' opacity='.55'>
+                  <rect x='690' y='360' width='340' height='190' rx='28'/>
+                  <rect x='730' y='405' width='260' height='16' rx='8' fill='%23ffffff' opacity='.55'/>
+                  <rect x='730' y='440' width='220' height='16' rx='8' fill='%23ffffff' opacity='.45'/>
+                  <circle cx='980' cy='505' r='10' fill='%23ffffff' opacity='.7'/>
+                </g>
+                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>REDES</text>
+              </svg>"/>
             <div class="body">
               <h4>REDES (LAN / Wi-Fi)</h4>
+              <p>Conectividad estable para casas, oficinas y negocios.</p>
               <ul>
-                <li>Diseño e instalación de red</li>
+                <li>Instalación y optimización de Wi-Fi</li>
                 <li>Configuración de routers/switches/AP</li>
-                <li>Optimización de cobertura y estabilidad</li>
                 <li>Diagnóstico y solución de fallas</li>
+                <li>Orden en rack, etiquetado y buenas prácticas</li>
               </ul>
             </div>
             <div class="foot">
+              <span class="tag">Conectividad</span>
               <a class="info" href="#contacto">INFO</a>
             </div>
           </article>
 
+          <!-- CCTV + NVR -->
           <article class="service">
-            <div class="img" aria-hidden="true"></div>
+            <img class="img" alt="CCTV y NVR" src="data:image/svg+xml;utf8,
+              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                <defs>
+                  <linearGradient id='g' x1='0' x2='1'>
+                    <stop offset='0' stop-color='%230ea5e9' stop-opacity='.22'/>
+                    <stop offset='1' stop-color='%2310b981' stop-opacity='.18'/>
+                  </linearGradient>
+                </defs>
+                <rect width='1200' height='700' fill='url(%23g)'/>
+                <circle cx='260' cy='210' r='160' fill='%230ea5e9' opacity='.16'/>
+                <circle cx='980' cy='420' r='200' fill='%2310b981' opacity='.14'/>
+                <g fill='%23111827' opacity='.6'>
+                  <rect x='280' y='260' width='640' height='240' rx='34'/>
+                  <circle cx='600' cy='380' r='88' fill='%23ffffff' opacity='.22'/>
+                  <circle cx='600' cy='380' r='52' fill='%23ffffff' opacity='.22'/>
+                  <circle cx='600' cy='380' r='24' fill='%23ffffff' opacity='.30'/>
+                  <rect x='520' y='510' width='160' height='20' rx='10' fill='%23111827' opacity='.35'/>
+                </g>
+                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>CCTV / NVR</text>
+              </svg>"/>
             <div class="body">
               <h4>CCTV + NVR (Videovigilancia)</h4>
+              <p>Protege tu propiedad con monitoreo y grabación.</p>
               <ul>
                 <li>Instalación de cámaras interior/exterior</li>
-                <li>Configuración de NVR y grabación</li>
+                <li>Configuración de NVR y almacenamiento</li>
                 <li>Acceso remoto (celular/PC)</li>
                 <li>Mantenimiento y ajustes</li>
               </ul>
             </div>
             <div class="foot">
+              <span class="tag">Seguridad</span>
               <a class="info" href="#contacto">INFO</a>
             </div>
           </article>
 
+          <!-- CABLEADO -->
           <article class="service">
-            <div class="img" aria-hidden="true"></div>
+            <img class="img" alt="Cableado estructurado" src="data:image/svg+xml;utf8,
+              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                <defs>
+                  <linearGradient id='g' x1='0' x2='1'>
+                    <stop offset='0' stop-color='%2310b981' stop-opacity='.20'/>
+                    <stop offset='1' stop-color='%230ea5e9' stop-opacity='.16'/>
+                  </linearGradient>
+                </defs>
+                <rect width='1200' height='700' fill='url(%23g)'/>
+                <circle cx='260' cy='520' r='190' fill='%2310b981' opacity='.12'/>
+                <circle cx='980' cy='220' r='170' fill='%230ea5e9' opacity='.14'/>
+                <g fill='none' stroke='%23111827' stroke-opacity='.40' stroke-width='16' stroke-linecap='round'>
+                  <path d='M240 220h320c60 0 90 30 90 90v80c0 60 30 90 90 90h320'/>
+                  <path d='M240 320h260c60 0 90 30 90 90v20c0 60 30 90 90 90h380'/>
+                </g>
+                <g fill='%23111827' opacity='.55'>
+                  <rect x='230' y='160' width='130' height='110' rx='22'/>
+                  <rect x='960' y='470' width='130' height='110' rx='22'/>
+                </g>
+                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>CABLEADO</text>
+              </svg>"/>
             <div class="body">
-              <h4>Cableado Estructurado</h4>
+              <h4>Cableado Estructurado (Voz y Datos)</h4>
+              <p>Instalación limpia, ordenada y preparada para crecer.</p>
               <ul>
-                <li>Voz y datos</li>
-                <li>Canalización y ordenado de cableado</li>
+                <li>Canalización, charola y tubería</li>
+                <li>Puntos de red / voz / datos</li>
                 <li>Etiquetado y organización en rack</li>
-                <li>Reubicación/expansión de puntos</li>
+                <li>Expansión y reubicación de puntos</li>
               </ul>
             </div>
             <div class="foot">
+              <span class="tag">Infraestructura</span>
               <a class="info" href="#contacto">INFO</a>
             </div>
           </article>
 
+          <!-- FIBRA -->
           <article class="service">
-            <div class="img" aria-hidden="true"></div>
+            <img class="img" alt="Fibra óptica" src="data:image/svg+xml;utf8,
+              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                <defs>
+                  <linearGradient id='g' x1='0' x2='1'>
+                    <stop offset='0' stop-color='%230ea5e9' stop-opacity='.22'/>
+                    <stop offset='1' stop-color='%2310b981' stop-opacity='.15'/>
+                  </linearGradient>
+                </defs>
+                <rect width='1200' height='700' fill='url(%23g)'/>
+                <circle cx='260' cy='190' r='160' fill='%230ea5e9' opacity='.14'/>
+                <circle cx='980' cy='520' r='210' fill='%2310b981' opacity='.12'/>
+                <g stroke='%23111827' stroke-opacity='.40' stroke-width='14' fill='none' stroke-linecap='round'>
+                  <path d='M260 520c240-220 420-260 690-360'/>
+                  <path d='M300 540c260-230 450-270 720-380'/>
+                  <path d='M340 560c280-240 480-280 740-400'/>
+                </g>
+                <g fill='%23111827' opacity='.55'>
+                  <circle cx='960' cy='160' r='18'/>
+                  <circle cx='990' cy='180' r='12'/>
+                  <circle cx='1018' cy='210' r='9'/>
+                </g>
+                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>FIBRA ÓPTICA</text>
+              </svg>"/>
             <div class="body">
               <h4>Fibra Óptica</h4>
+              <p>Enlaces rápidos y confiables para distancias largas.</p>
               <ul>
                 <li>Tendido y canalización</li>
                 <li>Terminación y organización</li>
-                <li>Enlaces y conversión (según proyecto)</li>
+                <li>Enlaces (según proyecto)</li>
                 <li>Mantenimiento preventivo</li>
               </ul>
             </div>
             <div class="foot">
+              <span class="tag">Alta velocidad</span>
               <a class="info" href="#contacto">INFO</a>
             </div>
           </article>
 
+          <!-- ALARMAS -->
           <article class="service">
-            <div class="img" aria-hidden="true"></div>
+            <img class="img" alt="Alarmas" src="data:image/svg+xml;utf8,
+              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                <defs>
+                  <linearGradient id='g' x1='0' x2='1'>
+                    <stop offset='0' stop-color='%2310b981' stop-opacity='.18'/>
+                    <stop offset='1' stop-color='%230ea5e9' stop-opacity='.18'/>
+                  </linearGradient>
+                </defs>
+                <rect width='1200' height='700' fill='url(%23g)'/>
+                <circle cx='260' cy='520' r='210' fill='%2310b981' opacity='.12'/>
+                <circle cx='980' cy='220' r='170' fill='%230ea5e9' opacity='.14'/>
+                <g fill='%23111827' opacity='.58'>
+                  <path d='M600 170c120 0 220 100 220 220v70H380v-70c0-120 100-220 220-220z'/>
+                  <rect x='470' y='470' width='260' height='90' rx='22'/>
+                  <circle cx='600' cy='515' r='14' fill='%23ffffff' opacity='.45'/>
+                </g>
+                <g stroke='%23111827' stroke-opacity='.35' stroke-width='12' fill='none' stroke-linecap='round'>
+                  <path d='M360 250c-40 50-40 120 0 170'/>
+                  <path d='M840 250c40 50 40 120 0 170'/>
+                </g>
+                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>ALARMAS</text>
+              </svg>"/>
             <div class="body">
               <h4>Alarmas</h4>
+              <p>Detección y alertas para mayor seguridad.</p>
               <ul>
                 <li>Sensores (movimiento / apertura)</li>
                 <li>Sirenas y panel de control</li>
@@ -417,14 +586,39 @@
               </ul>
             </div>
             <div class="foot">
+              <span class="tag">Protección</span>
               <a class="info" href="#contacto">INFO</a>
             </div>
           </article>
 
+          <!-- CONTROL DE ACCESO -->
           <article class="service">
-            <div class="img" aria-hidden="true"></div>
+            <img class="img" alt="Control de acceso" src="data:image/svg+xml;utf8,
+              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                <defs>
+                  <linearGradient id='g' x1='0' x2='1'>
+                    <stop offset='0' stop-color='%230ea5e9' stop-opacity='.20'/>
+                    <stop offset='1' stop-color='%2310b981' stop-opacity='.16'/>
+                  </linearGradient>
+                </defs>
+                <rect width='1200' height='700' fill='url(%23g)'/>
+                <circle cx='260' cy='210' r='170' fill='%230ea5e9' opacity='.14'/>
+                <circle cx='980' cy='520' r='210' fill='%2310b981' opacity='.12'/>
+                <g fill='%23111827' opacity='.58'>
+                  <rect x='420' y='170' width='360' height='440' rx='40'/>
+                  <rect x='470' y='230' width='260' height='80' rx='20' fill='%23ffffff' opacity='.18'/>
+                  <circle cx='600' cy='390' r='60' fill='%23ffffff' opacity='.18'/>
+                  <rect x='520' y='470' width='160' height='24' rx='12' fill='%23ffffff' opacity='.18'/>
+                </g>
+                <g fill='%23111827' opacity='.40'>
+                  <circle cx='600' cy='390' r='14'/>
+                  <rect x='592' y='405' width='16' height='26' rx='8'/>
+                </g>
+                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>CONTROL DE ACCESO</text>
+              </svg>"/>
             <div class="body">
               <h4>Control de Acceso</h4>
+              <p>Entradas con permisos, horarios y control.</p>
               <ul>
                 <li>Chapas eléctricas/magnéticas</li>
                 <li>Lectores (tarjeta / PIN / biométrico)</li>
@@ -433,17 +627,19 @@
               </ul>
             </div>
             <div class="foot">
+              <span class="tag">Accesos</span>
               <a class="info" href="#contacto">INFO</a>
             </div>
           </article>
+
         </div>
       </section>
 
-      <!-- ABOUT (like "Nosotros") -->
+      <!-- ABOUT -->
       <section id="nosotros">
         <div class="section-title">
           <h3>Nosotros</h3>
-          <span>Enfoque profesional y atención clara</span>
+          <span>Atención clara y trabajo profesional</span>
         </div>
 
         <div class="grid">
@@ -451,21 +647,21 @@
             <h4>Misión</h4>
             <p>
               Brindar soluciones de infraestructura tecnológica seguras y confiables, con instalaciones limpias,
-              configuraciones correctas y soporte oportuno, para que tu red y tus sistemas trabajen sin fallas.
+              configuraciones correctas y soporte oportuno para hogares, oficinas y negocios.
             </p>
           </article>
 
           <article class="about">
             <h4>Visión</h4>
             <p>
-              Ser una empresa reconocida por la calidad de instalación, la organización del trabajo y el servicio
-              al cliente en proyectos de redes, seguridad y conectividad.
+              Ser una empresa reconocida por la calidad de instalación, organización del trabajo y servicio al cliente
+              en proyectos de redes, seguridad y conectividad.
             </p>
           </article>
         </div>
       </section>
 
-      <!-- “Métodos” style section (3 tiles como en el ejemplo) -->
+      <!-- TRUST TILES -->
       <section>
         <div class="section-title">
           <h3>Lo que cuidamos en cada proyecto</h3>
@@ -474,34 +670,28 @@
 
         <div class="methods">
           <div class="tile">
-            <div class="img" aria-hidden="true"></div>
-            <div class="body">
-              <strong>Instalación limpia</strong>
-              <small>Canalización, orden y buena presentación.</small>
-            </div>
+            <div class="icon">🧼</div>
+            <strong>Instalación limpia</strong>
+            <small>Canalización, orden y buena presentación.</small>
           </div>
           <div class="tile">
-            <div class="img" aria-hidden="true"></div>
-            <div class="body">
-              <strong>Configuración correcta</strong>
-              <small>Usuarios, acceso remoto, permisos y estabilidad.</small>
-            </div>
+            <div class="icon">🛠️</div>
+            <strong>Configuración correcta</strong>
+            <small>Usuarios, permisos, acceso remoto y estabilidad.</small>
           </div>
           <div class="tile">
-            <div class="img" aria-hidden="true"></div>
-            <div class="body">
-              <strong>Soporte y mantenimiento</strong>
-              <small>Prevención, ajustes y solución de fallas.</small>
-            </div>
+            <div class="icon">🧩</div>
+            <strong>Soporte y mantenimiento</strong>
+            <small>Prevención, ajustes y solución de fallas.</small>
           </div>
         </div>
       </section>
 
-      <!-- FINAL CTA (like "Transforma el futuro...") -->
+      <!-- FINAL CTA -->
       <section class="hero" style="padding:20px 18px">
         <div class="hero-grid" style="grid-template-columns: 1.2fr .8fr">
           <div>
-            <h2 style="font-size:26px;margin:0 0 8px">Mejora tu seguridad y conectividad hoy mismo.</h2>
+            <h2 style="font-size:26px;margin:0 0 8px">¿Listo para mejorar tu seguridad y conectividad?</h2>
             <p style="margin:0;color:var(--muted)">
               Dinos qué necesitas (red, cámaras, fibra, alarma o acceso) y te orientamos para armar la mejor solución.
             </p>
