@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>180• services pro | Infraestructura tecnológica</title>
+  <meta name="description" content="180• services pro: redes, CCTV, NVR, cableado estructurado, voz y datos, fibra óptica, alarmas y control de acceso." />
+  <style>
+    :root{
+      --bg:#070b12;
+      --card:#0f1626;
+      --muted:#a9b3c7;
+      --text:#e9eefb;
+      --brand:#18d7d0;
+      --brand2:#3b82f6;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --max: 1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background:
+        radial-gradient(900px 500px at 10% 10%, rgba(24,215,208,.22), transparent 60%),
+        radial-gradient(700px 450px at 90% 20%, rgba(59,130,246,.18), transparent 55%),
+        radial-gradient(700px 450px at 50% 100%, rgba(24,215,208,.10), transparent 60%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.5;
+    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:28px 18px 64px;}
+    .topbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 16px; border:1px solid var(--line);
+      background: rgba(15,22,38,.65); backdrop-filter: blur(10px);
+      border-radius: var(--radius); box-shadow: var(--shadow);
+      position: sticky; top: 12px; z-index: 20;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; min-width: 220px;
+    }
+    .logo{
+      width:44px; height:44px; border-radius:14px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      display:grid; place-items:center; font-weight:900; letter-spacing:.5px;
+      color:#041018;
+      box-shadow: 0 10px 30px rgba(24,215,208,.25);
+    }
+    .brand h1{font-size:15px; margin:0}
+    .brand p{margin:0; font-size:12px; color:var(--muted)}
+    nav{
+      display:flex; gap:14px; flex-wrap:wrap; justify-content:flex-end;
+      font-size:13px;
+    }
+    nav a{
+      padding:8px 10px; border-radius:12px; border:1px solid transparent;
+      color: var(--muted);
+    }
+    nav a:hover{border-color:var(--line); color:var(--text); background: rgba(255,255,255,.04)}
+    .hero{
+      margin-top:18px;
+      border-radius: calc(var(--radius) + 6px);
+      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(15,22,38,.65), rgba(15,22,38,.35));
+      box-shadow: var(--shadow);
+      padding: 28px 18px;
+      overflow:hidden;
+      position:relative;
+    }
+    .hero::before{
+      content:"";
+      position:absolute; inset:-120px -140px auto auto;
+      width:320px; height:320px; border-radius:999px;
+      background: radial-gradient(circle, rgba(24,215,208,.22), transparent 70%);
+      filter: blur(2px);
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: start;
+    }
+    .hero h2{margin:0 0 8px; font-size:28px; letter-spacing:.2px}
+    .hero .subtitle{margin:0 0 16px; color:var(--muted); max-width: 62ch}
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size:12px;
+      color: var(--text);
+      display:flex; align-items:center; gap:8px;
+    }
+    .dot{width:8px; height:8px; border-radius:99px; background: var(--brand)}
+    .cta{
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .cta h3{margin:0 0 6px; font-size:14px}
+    .cta p{margin:0 0 12px; color:var(--muted); font-size:13px}
+    .btnrow{display:flex; flex-wrap:wrap; gap:10px}
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px; padding:10px 12px;
+      border-radius: 14px; border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      font-size: 13px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .btn.primary{
+      border-color: rgba(24,215,208,.40);
+      background: linear-gradient(135deg, rgba(24,215,208,.22), rgba(59,130,246,.12));
+    }
+    .btn:hover{transform: translateY(-1px)}
+    section{margin-top:18px}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin: 6px 4px 10px;
+    }
+    .section-title h3{margin:0; font-size:16px}
+    .section-title p{margin:0; color:var(--muted); font-size:12px}
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .card{
+      grid-column: span 6;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(15,22,38,.55);
+      padding: 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .card h4{margin:0 0 6px; font-size:14px}
+    .card p{margin:0; color:var(--muted); font-size:13px}
+    .list{
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+      display:grid;
+      gap: 8px;
+    }
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:10px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      font-size: 13px;
+      color: var(--text);
+    }
+    .badge{
+      font-size:11px; color:var(--muted);
+      border:1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 8px;
+      white-space: nowrap;
+      background: rgba(255,255,255,.02);
+    }
+    .foot{
+      margin-top:18px;
+      border-radius: var(--radius);
+      border:1px solid var(--line);
+      background: rgba(15,22,38,.45);
+      padding: 16px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .cols{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .mini{
+      border:1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.02);
+      padding: 12px;
+    }
+    .mini strong{color: var(--text)}
+    @media (max-width: 860px){
+      .hero-grid{grid-template-columns: 1fr}
+      .card{grid-column: span 12}
+      .cols{grid-template-columns: 1fr}
+      nav{display:none}
+      .brand{min-width:auto}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">180•</div>
+        <div>
+          <h1>180• services pro</h1>
+          <p>Infraestructura tecnológica · Seguridad · Conectividad</p>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#servicios">Servicios</a>
+        <a href="#soluciones">Soluciones</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-grid">
+          <div>
+            <h2>Infraestructura tecnológica confiable para tu casa, negocio o empresa</h2>
+            <p class="subtitle">
+              Instalación, configuración y soporte de <b>Redes</b>, <b>CCTV</b>, <b>NVR</b>, <b>Cableado Estructurado</b>,
+              <b>Voz y Datos</b>, <b>Fibra Óptica</b>, <b>Alarmas</b> y <b>Control de Acceso</b>.
+            </p>
+
+            <div class="pillrow" aria-label="Especialidades">
+              <div class="pill"><span class="dot"></span> REDES</div>
+              <div class="pill"><span class="dot"></span> NVR</div>
+              <div class="pill"><span class="dot"></span> CCTV</div>
+              <div class="pill"><span class="dot"></span> Cableado Estructurado</div>
+              <div class="pill"><span class="dot"></span> Voz y Datos</div>
+              <div class="pill"><span class="dot"></span> Fibra Óptica</div>
+              <div class="pill"><span class="dot"></span> Alarmas</div>
+              <div class="pill"><span class="dot"></span> Control de Acceso</div>
+            </div>
+          </div>
+
+          <aside class="cta" id="contacto">
+            <h3>Contacto rápido</h3>
+            <p>Agrega aquí tus datos (WhatsApp, correo, ubicación, horario) cuando quieras.</p>
+
+            <div class="btnrow">
+              <a class="btn primary" href="tel:+0000000000" aria-label="Llamar">📞 Llamar</a>
+              <a class="btn" href="mailto:contacto@tudominio.com" aria-label="Enviar correo">✉️ Correo</a>
+              <a class="btn" href="#servicios" aria-label="Ver servicios">🧰 Ver servicios</a>
+            </div>
+
+            <p style="margin-top:12px;color:var(--muted);font-size:12px">
+              *Nota: edita el teléfono y el correo en el HTML para que queden reales.
+            </p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="servicios">
+        <div class="section-title">
+          <h3>Servicios principales</h3>
+          <p>Instalación · Configuración · Mantenimiento</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h4>Redes (LAN / WAN / Wi-Fi)</h4>
+            <p>Diseño e implementación de redes estables y seguras.</p>
+            <ul class="list">
+              <li class="li"><span class="badge">Incluye</span> Cableado y organización de racks/patch panel</li>
+              <li class="li"><span class="badge">Incluye</span> Configuración de switches, routers y VLAN</li>
+              <li class="li"><span class="badge">Incluye</span> Wi-Fi empresarial (cobertura, roaming, control)</li>
+              <li class="li"><span class="badge">Incluye</span> Optimización y diagnóstico de fallas</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h4>CCTV + NVR (Videovigilancia)</h4>
+            <p>Monitoreo y grabación para seguridad y control.</p>
+            <ul class="list">
+              <li class="li"><span class="badge">Incluye</span> Instalación de cámaras (interior/exterior)</li>
+              <li class="li"><span class="badge">Incluye</span> Configuración de NVR/DVR y almacenamiento</li>
+              <li class="li"><span class="badge">Incluye</span> Acceso remoto (PC/móvil) y usuarios</li>
+              <li class="li"><span class="badge">Incluye</span> Mantenimiento, ajuste de imagen y limpieza</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h4>Cableado Estructurado</h4>
+            <p>Instalación ordenada para voz, datos y CCTV.</p>
+            <ul class="list">
+              <li class="li"><span class="badge">Incluye</span> Canalización, charola y tubería</li>
+              <li class="li"><span class="badge">Incluye</span> Etiquetado y documentación de puntos</li>
+              <li class="li"><span class="badge">Incluye</span> Ponchado, faceplates, patch cords</li>
+              <li class="li"><span class="badge">Incluye</span> Pruebas básicas de continuidad y enlace</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h4>Fibra Óptica</h4>
+            <p>Conectividad para distancias largas y alta velocidad.</p>
+            <ul class="list">
+              <li class="li"><span class="badge">Incluye</span> Tendido y canalización</li>
+              <li class="li"><span class="badge">Incluye</span> Terminación y organización (ODF/patch)</li>
+              <li class="li"><span class="badge">Incluye</span> Conversores/media y enlaces</li>
+              <li class="li"><span class="badge">Incluye</span> Mantenimiento preventivo</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h4>Alarmas</h4>
+            <p>Protección con sensores y alertas.</p>
+            <ul class="list">
+              <li class="li"><span class="badge">Incluye</span> Sensores (movimiento, puertas/ventanas)</li>
+              <li class="li"><span class="badge">Incluye</span> Sirenas y panel de control</li>
+              <li class="li"><span class="badge">Incluye</span> Zonas y configuración de eventos</li>
+              <li class="li"><span class="badge">Incluye</span> Revisión y mantenimiento</li>
+            </ul>
+          </article>
+
+          <article class="card">
+            <h4>Control de Acceso</h4>
+            <p>Administración de entradas con registro y permisos.</p>
+            <ul class="list">
+              <li class="li"><span class="badge">Incluye</span> Chapas eléctricas / magnéticas</li>
+              <li class="li"><span class="badge">Incluye</span> Lectores (tarjeta, PIN, biométrico)</li>
+              <li class="li"><span class="badge">Incluye</span> Botón de salida, timbres y seguridad</li>
+              <li class="li"><span class="badge">Incluye</span> Altas/bajas de usuarios y horarios</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section id="soluciones">
+        <div class="section-title">
+          <h3>Soluciones complementarias</h3>
+          <p>Lo que normalmente se necesita junto con tus servicios principales</p>
+        </div>
+
+        <div class="cols">
+          <div class="mini">
+            <strong>Soporte y mantenimiento</strong>
+            <div style="margin-top:8px;color:var(--muted)">
+              • Mantenimiento preventivo<br/>
+              • Atención a fallas<br/>
+              • Reubicación/expansión de puntos<br/>
+              • Revisión de cableado y conexiones
+            </div>
+          </div>
+
+          <div class="mini">
+            <strong>Seguridad de red</strong>
+            <div style="margin-top:8px;color:var(--muted)">
+              • Segmentación (VLAN)<br/>
+              • Reglas y acceso remoto seguro<br/>
+              • Firewall (configuración básica)<br/>
+              • Buenas prácticas y endurecimiento
+            </div>
+          </div>
+
+          <div class="mini">
+            <strong>Infraestructura y energía</strong>
+            <div style="margin-top:8px;color:var(--muted)">
+              • Racks y organización<br/>
+              • UPS / respaldo eléctrico<br/>
+              • Tierras físicas (revisión)<br/>
+              • Orden y canalización limpia
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="proceso">
+        <div class="section-title">
+          <h3>Proceso de trabajo</h3>
+          <p>Simple, claro y profesional</p>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <h4>1) Diagnóstico</h4>
+            <p>Revisión del sitio y necesidades: cobertura, puntos, cámaras, accesos y rutas de cableado.</p>
+          </article>
+          <article class="card">
+            <h4>2) Diseño</h4>
+            <p>Propuesta técnica: distribución, canalización, equipos sugeridos y buenas prácticas de instalación.</p>
+          </article>
+          <article class="card">
+            <h4>3) Instalación</h4>
+            <p>Montaje, configuración y pruebas: red, CCTV/NVR, alarmas, control de acceso y fibra óptica.</p>
+          </article>
+          <article class="card">
+            <h4>4) Entrega y soporte</h4>
+            <p>Entrega operativa, explicación de uso y soporte/mantenimiento (si lo requieres).</p>
+          </article>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <div style="display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; align-items:center">
+          <div><b style="color:var(--text)">180• services pro</b> · Infraestructura tecnológica</div>
+          <div>REDES · NVR · CCTV · Cableado · Voz y Datos · Fibra Óptica · Alarmas · Control de Acceso</div>
+        </div>
+      </footer>
+    </main>
+
+  </div>
+</body>
+</html>
