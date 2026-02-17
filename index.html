@@ -4,20 +4,25 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>180• services pro | Infraestructura tecnológica</title>
-  <meta name="description" content="Redes, CCTV, NVR, cableado estructurado, voz y datos, fibra óptica, alarmas y control de acceso." />
+  <meta name="description" content="Redes, CCTV/NVR, cableado estructurado, voz y datos, fibra óptica, alarmas y control de acceso." />
 
   <style>
     :root{
-      --bg:#ffffff;
-      --text:#111827;
-      --muted:#6b7280;
-      --line:#e5e7eb;
-      --soft:#f9fafb;
-      --brand:#10b981;   /* verde */
-      --brand2:#0ea5e9;  /* azul */
-      --shadow: 0 14px 34px rgba(17,24,39,.10);
-      --radius: 18px;
-      --max: 1120px;
+      --bg:#070A12;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --line: rgba(255,255,255,.10);
+      --text:#EAF0FF;
+      --muted: rgba(234,240,255,.70);
+      --muted2: rgba(234,240,255,.55);
+      --brand:#19E6C9;
+      --brand2:#49A7FF;
+      --brand3:#A855F7;
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,.35);
+      --r: 18px;
+      --max: 1160px;
+      --glass: blur(14px);
     }
 
     *{box-sizing:border-box}
@@ -25,159 +30,287 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      background:
-        radial-gradient(900px 500px at 10% 10%, rgba(16,185,129,.10), transparent 60%),
-        radial-gradient(900px 520px at 90% 18%, rgba(14,165,233,.10), transparent 55%),
-        #fff;
       color: var(--text);
-      line-height: 1.6;
+      background:
+        radial-gradient(1000px 600px at 12% 10%, rgba(25,230,201,.22), transparent 60%),
+        radial-gradient(900px 540px at 88% 18%, rgba(73,167,255,.18), transparent 55%),
+        radial-gradient(1000px 700px at 50% 100%, rgba(168,85,247,.14), transparent 60%),
+        linear-gradient(180deg, #050713 0%, #070A12 40%, #060913 100%);
+      overflow-x:hidden;
+      line-height:1.6;
     }
-    a{color:inherit; text-decoration:none}
 
-    .wrap{max-width:var(--max); margin:0 auto; padding: 18px 16px 80px;}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:18px 16px 90px;}
 
-    /* Header */
+    /* Background moving grid */
+    .bg-grid{
+      position:fixed; inset:0;
+      pointer-events:none;
+      opacity:.25;
+      background-image:
+        linear-gradient(to right, rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: radial-gradient(circle at 50% 30%, rgba(0,0,0,1), rgba(0,0,0,.15) 60%, rgba(0,0,0,0));
+      animation: gridMove 22s linear infinite;
+    }
+    @keyframes gridMove{
+      0%{ transform: translate3d(0,0,0) }
+      100%{ transform: translate3d(-72px,-72px,0) }
+    }
+
+    /* Topbar */
     .topbar{
       display:flex; align-items:center; justify-content:space-between;
-      gap:12px;
+      gap:12px; padding:10px 12px;
       border:1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 10px 12px;
-      background:#fff;
+      border-radius: 999px;
+      background: rgba(10,14,26,.55);
+      backdrop-filter: var(--glass);
       box-shadow: var(--shadow);
-      position: sticky; top: 12px; z-index: 50;
+      position: sticky; top: 12px; z-index: 60;
     }
-    .brand{
-      display:flex; align-items:center; gap:10px;
-      min-width: 220px;
-    }
+    .brand{display:flex; align-items:center; gap:10px; min-width: 240px;}
     .logo{
-      width:44px; height:44px; border-radius: 14px;
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      width:44px; height:44px; border-radius: 16px;
+      background: linear-gradient(135deg, rgba(25,230,201,.95), rgba(73,167,255,.92));
       display:grid; place-items:center;
-      color:white; font-weight:900;
-      letter-spacing:.3px;
+      font-weight: 1000; letter-spacing: .2px;
+      color:#051018;
+      box-shadow: 0 14px 40px rgba(25,230,201,.18);
+      position:relative;
+      overflow:hidden;
     }
-    .brand h1{margin:0; font-size:14px}
-    .brand p{margin:0; font-size:12px; color: var(--muted)}
-    nav{
-      display:flex; gap:8px; flex-wrap:wrap;
-      justify-content:flex-end;
-      font-size:13px;
+    /* glossy sweep */
+    .logo::after{
+      content:"";
+      position:absolute; inset:-40% -60%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.35) 52%, transparent 65%);
+      transform: translateX(-40%);
+      animation: sweep 2.8s ease-in-out infinite;
+      opacity:.8;
     }
+    @keyframes sweep{
+      0%{transform: translateX(-60%) rotate(8deg)}
+      55%{transform: translateX(55%) rotate(8deg)}
+      100%{transform: translateX(60%) rotate(8deg)}
+    }
+
+    .brand h1{margin:0; font-size:13.5px}
+    .brand p{margin:0; font-size:12px; color:var(--muted)}
+
+    nav{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end; font-size:13px;}
     nav a{
       padding:8px 10px;
-      border-radius: 12px;
+      border-radius: 999px;
       color: var(--muted);
+      border: 1px solid transparent;
+      transition: .18s ease;
     }
     nav a:hover{
-      background: #f3f4f6;
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.10);
       color: var(--text);
+      transform: translateY(-1px);
     }
 
     .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
       padding:10px 12px;
-      border-radius: 14px;
-      border:1px solid var(--line);
-      background: #fff;
-      font-size: 13px;
-      cursor: pointer;
-      user-select:none;
-      transition: transform .12s ease;
-    }
-    .btn.primary{
-      border-color: rgba(16,185,129,.35);
-      background: linear-gradient(135deg, rgba(16,185,129,.14), rgba(14,165,233,.12));
-    }
-    .btn:hover{transform: translateY(-1px)}
-
-    .chip{
-      display:inline-flex; align-items:center; gap:8px;
-      border:1px solid var(--line);
       border-radius: 999px;
-      padding:8px 10px;
-      font-size:12px;
-      color: var(--muted);
-      background: #fff;
-      width: fit-content;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-size:13px;
+      cursor:pointer;
+      user-select:none;
+      transition: .18s ease;
+      box-shadow: var(--shadow2);
     }
-    .dot{width:8px; height:8px; border-radius:999px; background: var(--brand)}
+    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.08)}
+    .btn.primary{
+      border-color: rgba(25,230,201,.28);
+      background: linear-gradient(135deg, rgba(25,230,201,.22), rgba(73,167,255,.14));
+    }
 
     /* Hero */
     .hero{
-      margin-top: 18px;
-      border-radius: calc(var(--radius) + 8px);
-      background: linear-gradient(180deg, #ffffff, #f9fafb);
-      border: 1px solid var(--line);
+      margin-top:18px;
+      border-radius: 28px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(900px 480px at 15% 10%, rgba(25,230,201,.18), transparent 60%),
+        radial-gradient(700px 420px at 90% 20%, rgba(73,167,255,.14), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      backdrop-filter: var(--glass);
       box-shadow: var(--shadow);
       padding: 26px 18px;
-      position: relative;
       overflow:hidden;
+      position:relative;
     }
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset: -140px -160px auto auto;
-      width: 360px; height: 360px; border-radius: 999px;
-      background: radial-gradient(circle, rgba(16,185,129,.16), transparent 65%);
-      pointer-events:none;
+
+    /* floating blobs */
+    .blob{
+      position:absolute; border-radius: 999px; filter: blur(20px);
+      opacity:.55; pointer-events:none;
+      mix-blend-mode: screen;
+      animation: blobFloat 10s ease-in-out infinite;
     }
+    .blob.b1{width:240px;height:240px; left:-80px; top:30px; background: rgba(25,230,201,.35)}
+    .blob.b2{width:260px;height:260px; right:-90px; top:-40px; background: rgba(73,167,255,.28); animation-delay: -2s}
+    .blob.b3{width:220px;height:220px; right:10%; bottom:-90px; background: rgba(168,85,247,.22); animation-delay: -5s}
+    @keyframes blobFloat{
+      0%,100%{ transform: translate3d(0,0,0) scale(1) }
+      50%{ transform: translate3d(0,-18px,0) scale(1.04) }
+    }
+
     .hero-grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.15fr .85fr;
       gap: 16px;
       align-items: start;
+      position:relative;
+      z-index: 2;
     }
-    .hero h2{
-      margin: 10px 0 8px;
-      font-size: 34px;
+
+    /* Title with animated icon */
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 12px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+      font-size:12px;
+      width: fit-content;
+    }
+    .spark{
+      width:20px; height:20px;
+      display:grid; place-items:center;
+      border-radius: 10px;
+      background: linear-gradient(135deg, rgba(25,230,201,.28), rgba(73,167,255,.18));
+      border:1px solid rgba(255,255,255,.14);
+      box-shadow: 0 10px 30px rgba(25,230,201,.10);
+      position:relative;
+      overflow:hidden;
+    }
+    .spark::after{
+      content:"";
+      position:absolute; inset:-60%;
+      background: conic-gradient(from 200deg, transparent, rgba(255,255,255,.30), transparent);
+      animation: spin 2.8s linear infinite;
+      opacity:.9;
+    }
+    @keyframes spin{to{transform: rotate(360deg)}}
+
+    h2{
+      margin: 12px 0 10px;
+      font-size: 38px;
       line-height: 1.05;
-      letter-spacing: -.3px;
+      letter-spacing: -0.6px;
     }
+    .grad{
+      background: linear-gradient(90deg, var(--brand) 0%, var(--brand2) 55%, rgba(168,85,247,.9) 100%);
+      -webkit-background-clip: text;
+      background-clip:text;
+      color: transparent;
+    }
+
     .hero p{
       margin: 0 0 14px;
       color: var(--muted);
-      max-width: 66ch;
+      max-width: 70ch;
       font-size: 14px;
     }
-    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 10px}
-    .pill{
-      border:1px solid var(--line);
-      background:#fff;
-      border-radius: 999px;
-      padding: 8px 10px;
-      font-size: 12px;
-      color: var(--text);
-      display:inline-flex; align-items:center; gap:8px;
-    }
 
-    /* CTA */
-    .cta{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background:#fff;
-      box-shadow: var(--shadow);
-      padding: 16px;
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px}
+
+    .pillrow{display:flex; flex-wrap:wrap; gap:10px; margin-top: 12px}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 9px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      font-size: 12px;
+      color: rgba(234,240,255,.88);
+      transition:.18s ease;
     }
-    .cta h3{margin:0 0 6px; font-size:15px}
-    .cta p{margin:0 0 12px; font-size:13px; color: var(--muted)}
-    .btnrow{display:flex; gap:10px; flex-wrap:wrap}
-    .note{margin-top:10px; font-size:12px; color: var(--muted)}
+    .pill:hover{transform: translateY(-1px); background: rgba(255,255,255,.07)}
+    .dot{width:8px; height:8px; border-radius:999px; background: var(--brand); box-shadow: 0 0 0 4px rgba(25,230,201,.12)}
+
+    /* CTA card */
+    .cta{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(10,14,26,.50);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow2);
+      padding: 16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .cta::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle, rgba(25,230,201,.20), transparent 55%);
+      opacity:.7;
+      transform: translate(20%, -10%);
+      pointer-events:none;
+    }
+    .cta h3{margin:0 0 6px; font-size:15px; position:relative}
+    .cta p{margin:0 0 12px; font-size:13px; color: var(--muted); position:relative}
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; position:relative}
+    .note{margin-top:10px; font-size:12px; color: var(--muted2); position:relative}
     .mini-list{
-      margin: 10px 0 0;
+      margin: 12px 0 0;
       padding: 0;
       list-style: none;
       display:grid; gap:8px;
       font-size: 12px;
       color: var(--muted);
+      position:relative;
     }
     .mini-list li{
-      border:1px dashed var(--line);
-      padding: 8px 10px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
+      padding: 9px 10px;
       border-radius: 14px;
-      background: var(--soft);
+      display:flex; align-items:center; gap:10px;
+    }
+    .check{
+      width:18px; height:18px; border-radius: 999px;
+      background: rgba(25,230,201,.20);
+      border:1px solid rgba(25,230,201,.25);
+      display:grid; place-items:center;
+      color: rgba(234,240,255,.9);
+      font-size: 12px;
+    }
+
+    /* Hero illustration (animated) */
+    .hero-illustration{
+      margin-top: 10px;
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: 22px;
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      box-shadow: var(--shadow2);
+      position:relative;
+    }
+    .hero-illustration svg{display:block; width:100%; height:auto}
+    .glowline{
+      stroke-dasharray: 10 10;
+      animation: dash 2.4s linear infinite;
+      opacity:.9;
+    }
+    @keyframes dash{to{stroke-dashoffset:-40}}
+    .pulse{
+      transform-origin: 50% 50%;
+      animation: pulse 1.9s ease-in-out infinite;
+    }
+    @keyframes pulse{
+      0%,100%{transform: scale(1); opacity:.9}
+      50%{transform: scale(1.06); opacity:1}
     }
 
     /* Sections */
@@ -189,34 +322,82 @@
     .section-title h3{margin:0; font-size:20px}
     .section-title span{color:var(--muted); font-size:13px}
 
+    /* Service grid */
     .grid{
       display:grid;
       grid-template-columns: repeat(12, 1fr);
       gap: 12px;
     }
 
-    /* Service cards (más “amigables”) */
     .service{
       grid-column: span 4;
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background:#fff;
-      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(255,255,255,.05);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow2);
       overflow:hidden;
-      transition: transform .15s ease, box-shadow .15s ease;
+      position:relative;
+      transform: translateY(6px);
+      opacity: 0;
+      transition: .5s ease;
     }
+    .service.reveal{
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* animated shimmer overlay */
+    .service::before{
+      content:"";
+      position:absolute; inset:-40% -60%;
+      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.14) 52%, transparent 65%);
+      transform: translateX(-60%);
+      opacity:.45;
+      pointer-events:none;
+    }
+    .service:hover::before{
+      animation: shimmer 1.1s ease forwards;
+    }
+    @keyframes shimmer{
+      to{transform: translateX(60%)}
+    }
+
     .service:hover{
-      transform: translateY(-3px);
-      box-shadow: 0 18px 40px rgba(17,24,39,.12);
+      transform: translateY(-4px) scale(1.01);
+      box-shadow: 0 22px 60px rgba(0,0,0,.55);
+      border-color: rgba(25,230,201,.20);
     }
-    .service .img{
-      height: 170px;
+
+    .img{
+      height: 180px;
+      width: 100%;
       display:block;
       object-fit: cover;
-      width: 100%;
-      background: #eef2ff;
+      background: #0b1224;
+      position:relative;
     }
-    .service .body{padding: 14px}
+
+    /* add a subtle animated gradient overlay on images */
+    .imgwrap{position:relative}
+    .imgwrap::after{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(600px 260px at 20% 20%, rgba(25,230,201,.22), transparent 55%),
+        radial-gradient(520px 260px at 85% 30%, rgba(73,167,255,.18), transparent 55%),
+        linear-gradient(120deg, rgba(168,85,247,.10), transparent 55%);
+      mix-blend-mode: screen;
+      opacity: .75;
+      animation: drift 6s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes drift{
+      0%,100%{transform: translate3d(0,0,0)}
+      50%{transform: translate3d(8px,-6px,0)}
+    }
+
+    .body{padding: 14px}
     .service h4{margin:0 0 8px; font-size:15px}
     .service p{margin:0 0 10px; color: var(--muted); font-size: 13px}
     .service ul{
@@ -226,18 +407,19 @@
       font-size: 13px;
       display:grid; gap:4px;
     }
-    .service .foot{
+
+    .foot{
       padding: 12px 14px 16px;
       display:flex; justify-content:space-between; align-items:center;
       gap:10px;
-      border-top: 1px solid var(--line);
-      background: #fff;
+      border-top: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
     }
     .tag{
       font-size: 11px;
-      color: var(--muted);
-      border: 1px solid var(--line);
-      background: var(--soft);
+      color: rgba(234,240,255,.78);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.05);
       border-radius: 999px;
       padding: 6px 8px;
     }
@@ -245,85 +427,131 @@
       display:inline-flex; align-items:center; gap:8px;
       border-radius: 999px;
       padding: 10px 12px;
-      border:1px solid rgba(16,185,129,.35);
-      background: linear-gradient(135deg, rgba(16,185,129,.14), rgba(14,165,233,.10));
+      border:1px solid rgba(25,230,201,.28);
+      background: linear-gradient(135deg, rgba(25,230,201,.22), rgba(73,167,255,.14));
       font-size: 13px;
       cursor:pointer;
       white-space: nowrap;
+      transition: .18s ease;
     }
+    .info:hover{transform: translateY(-1px); border-color: rgba(25,230,201,.45)}
 
     /* About */
     .about{
       grid-column: span 6;
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(255,255,255,.05);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow2);
       padding: 16px;
+      transform: translateY(6px);
+      opacity: 0;
+      transition: .5s ease;
     }
+    .about.reveal{transform: translateY(0); opacity:1}
     .about h4{margin:0 0 6px; font-size:16px}
     .about p{margin:0; color:var(--muted); font-size:13px}
 
-    /* “Confianza” (3 tiles) */
+    /* Tiles */
     .methods{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
     }
     .tile{
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(255,255,255,.05);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow2);
       padding: 14px;
+      transform: translateY(6px);
+      opacity: 0;
+      transition: .5s ease;
     }
+    .tile.reveal{transform: translateY(0); opacity:1}
     .tile strong{display:block; font-size:14px}
     .tile small{color:var(--muted)}
     .icon{
-      width:42px; height:42px;
-      border-radius: 14px;
+      width:44px; height:44px;
+      border-radius: 16px;
       display:grid; place-items:center;
-      background: linear-gradient(135deg, rgba(16,185,129,.18), rgba(14,165,233,.14));
-      border: 1px solid rgba(229,231,235,.9);
+      background: linear-gradient(135deg, rgba(25,230,201,.22), rgba(73,167,255,.14));
+      border: 1px solid rgba(255,255,255,.12);
       margin-bottom: 10px;
       font-size: 20px;
+      box-shadow: 0 14px 40px rgba(25,230,201,.08);
     }
 
     /* Footer */
     footer{
       margin-top: 22px;
-      border:1px solid var(--line);
-      border-radius: var(--radius);
-      background: #fff;
-      box-shadow: var(--shadow);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(255,255,255,.05);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow2);
       padding: 16px;
       color: var(--muted);
       font-size: 12px;
     }
 
-    /* Mobile */
-    @media (max-width: 940px){
+    /* Floating WhatsApp */
+    .float-wa{
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      z-index: 70;
+      display:flex; align-items:center; gap:10px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border:1px solid rgba(25,230,201,.28);
+      background: linear-gradient(135deg, rgba(25,230,201,.22), rgba(73,167,255,.14));
+      box-shadow: var(--shadow);
+      backdrop-filter: var(--glass);
+      transition: .18s ease;
+      font-size: 13px;
+    }
+    .float-wa:hover{transform: translateY(-2px)}
+    .wa-dot{
+      width:10px; height:10px; border-radius:999px;
+      background: var(--brand);
+      box-shadow: 0 0 0 6px rgba(25,230,201,.14);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
       .hero-grid{grid-template-columns: 1fr}
       .service{grid-column: span 6}
       nav{display:none}
+      h2{font-size: 34px}
     }
     @media (max-width: 620px){
-      .hero h2{font-size: 28px}
+      h2{font-size: 28px}
       .service{grid-column: span 12}
       .methods{grid-template-columns: 1fr}
+      .float-wa span{display:none}
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{animation:none !important; transition:none !important}
+      .bg-grid{display:none}
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
+  <div class="bg-grid" aria-hidden="true"></div>
 
+  <div class="wrap">
     <header class="topbar">
       <div class="brand">
-        <div class="logo">180•</div>
+        <div class="logo" aria-label="Logo 180•">180•</div>
         <div>
           <h1>180• services pro</h1>
-          <p>Infraestructura tecnológica</p>
+          <p>Redes · CCTV · Fibra · Alarmas · Acceso</p>
         </div>
       </div>
 
@@ -331,100 +559,165 @@
         <a href="#inicio">Inicio</a>
         <a href="#servicios">Servicios</a>
         <a href="#nosotros">Nosotros</a>
-        <a href="#contacto">Contáctanos</a>
+        <a href="#contacto">Contacto</a>
       </nav>
 
-      <a class="btn primary" href="#contacto">💬 WhatsApp</a>
+      <a class="btn primary" href="#contacto">💬 Contactar</a>
     </header>
 
     <main>
-      <!-- HERO -->
       <section class="hero" id="inicio">
+        <div class="blob b1"></div>
+        <div class="blob b2"></div>
+        <div class="blob b3"></div>
+
         <div class="hero-grid">
           <div>
-            <div class="chip"><span class="dot"></span> Seguridad · Conectividad · Soporte</div>
-            <h2>Soluciones en redes y seguridad<br/>para hogares y negocios</h2>
+            <div class="kicker">
+              <span class="spark" aria-hidden="true"></span>
+              Infraestructura tecnológica para hogares y negocios
+            </div>
+
+            <h2>
+              Conecta, protege y controla <br/>
+              <span class="grad">tu espacio con soluciones pro</span>
+            </h2>
+
             <p>
-              Instalación y mantenimiento de <b>REDES</b>, <b>CCTV</b>, <b>NVR</b>, <b>Cableado Estructurado</b>,
+              Instalación y mantenimiento de <b>REDES</b>, <b>CCTV</b>/<b>NVR</b>, <b>Cableado Estructurado</b>,
               <b>Voz y Datos</b>, <b>Fibra Óptica</b>, <b>Alarmas</b> y <b>Control de Acceso</b>.
-              Sin precios en la web: te orientamos según tu necesidad.
+              Trabajo limpio, configuración correcta y soporte.
             </p>
 
+            <div class="hero-actions">
+              <!-- CAMBIA EL NÚMERO REAL -->
+              <a class="btn primary" href="https://wa.me/5210000000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20180%E2%80%A2%20services%20pro.">WhatsApp</a>
+              <a class="btn" href="#servicios">Ver servicios</a>
+              <a class="btn" href="#nosotros">Conócenos</a>
+            </div>
+
             <div class="pillrow">
-              <div class="pill"><span class="dot"></span> Trabajo limpio y ordenado</div>
-              <div class="pill"><span class="dot"></span> Configuración profesional</div>
+              <div class="pill"><span class="dot"></span> Instalación profesional</div>
+              <div class="pill"><span class="dot"></span> Configuración y pruebas</div>
+              <div class="pill"><span class="dot"></span> Orden y canalización</div>
               <div class="pill"><span class="dot"></span> Soporte y mantenimiento</div>
-              <div class="pill"><span class="dot"></span> Seguridad y confiabilidad</div>
+            </div>
+
+            <!-- Hero animated illustration -->
+            <div class="hero-illustration" aria-hidden="true">
+              <svg viewBox="0 0 1200 420" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="bg" x1="0" x2="1">
+                    <stop offset="0" stop-color="rgba(25,230,201,.28)"/>
+                    <stop offset=".55" stop-color="rgba(73,167,255,.18)"/>
+                    <stop offset="1" stop-color="rgba(168,85,247,.14)"/>
+                  </linearGradient>
+                  <linearGradient id="wire" x1="0" x2="1">
+                    <stop offset="0" stop-color="rgba(25,230,201,.95)"/>
+                    <stop offset="1" stop-color="rgba(73,167,255,.90)"/>
+                  </linearGradient>
+                </defs>
+
+                <rect x="0" y="0" width="1200" height="420" fill="rgba(255,255,255,.02)"/>
+                <circle cx="220" cy="140" r="140" fill="url(#bg)" opacity=".9"/>
+                <circle cx="1040" cy="80" r="170" fill="url(#bg)" opacity=".7"/>
+
+                <!-- network line -->
+                <path d="M140 310 C 340 140, 520 360, 720 200 S 1040 240, 1120 140"
+                      fill="none" stroke="url(#wire)" stroke-width="10" stroke-linecap="round" opacity=".85"/>
+                <path d="M140 310 C 340 140, 520 360, 720 200 S 1040 240, 1120 140"
+                      fill="none" stroke="rgba(255,255,255,.35)" stroke-width="3" stroke-linecap="round"
+                      class="glowline"/>
+
+                <!-- nodes -->
+                <g>
+                  <circle cx="140" cy="310" r="16" fill="rgba(25,230,201,.95)" class="pulse"/>
+                  <circle cx="420" cy="220" r="12" fill="rgba(73,167,255,.92)" class="pulse" style="animation-delay:-.5s"/>
+                  <circle cx="720" cy="200" r="14" fill="rgba(168,85,247,.85)" class="pulse" style="animation-delay:-1s"/>
+                  <circle cx="990" cy="220" r="12" fill="rgba(25,230,201,.90)" class="pulse" style="animation-delay:-1.4s"/>
+                  <circle cx="1120" cy="140" r="16" fill="rgba(73,167,255,.92)" class="pulse" style="animation-delay:-.2s"/>
+                </g>
+
+                <!-- small UI blocks -->
+                <g opacity=".78">
+                  <rect x="760" y="255" width="320" height="120" rx="18" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)"/>
+                  <rect x="790" y="285" width="200" height="14" rx="7" fill="rgba(255,255,255,.20)"/>
+                  <rect x="790" y="312" width="240" height="14" rx="7" fill="rgba(255,255,255,.16)"/>
+                  <rect x="790" y="339" width="160" height="14" rx="7" fill="rgba(255,255,255,.12)"/>
+                </g>
+
+                <text x="34" y="58" font-family="Arial" font-size="34" fill="rgba(234,240,255,.80)">Conectividad + Seguridad</text>
+              </svg>
             </div>
           </div>
 
           <aside class="cta" id="contacto">
             <h3>Contáctanos</h3>
-            <p>Cuéntanos qué necesitas y te respondemos rápido.</p>
+            <p>Cuéntanos tu necesidad y te orientamos. (Sin precios en la web.)</p>
 
             <div class="btnrow">
               <!-- CAMBIA EL NÚMERO REAL -->
-              <a class="btn primary" href="https://wa.me/5210000000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios.">💬 WhatsApp</a>
+              <a class="btn primary" href="https://wa.me/5210000000000?text=Hola%2C%20quiero%20cotizar%20un%20proyecto%20de%20red%2Fc%C3%A1maras%2Ffibra%2Falarma.">💬 WhatsApp</a>
               <a class="btn" href="tel:+520000000000">📞 Llamar</a>
               <a class="btn" href="mailto:contacto@tudominio.com">✉️ Correo</a>
             </div>
 
             <ul class="mini-list">
-              <li>✅ Visita y diagnóstico</li>
-              <li>✅ Instalación y configuración</li>
-              <li>✅ Mantenimiento y soporte</li>
+              <li><span class="check">✓</span> Visita y diagnóstico</li>
+              <li><span class="check">✓</span> Instalación + configuración</li>
+              <li><span class="check">✓</span> Mantenimiento y soporte</li>
             </ul>
 
             <div class="note">
-              *Edita WhatsApp: cambia <b>5210000000000</b> por tu número (con lada).
+              *Edita el WhatsApp: cambia <b>5210000000000</b> por tu número (con lada).
             </div>
           </aside>
         </div>
       </section>
 
-      <!-- SERVICES -->
       <section id="servicios">
         <div class="section-title">
-          <h3>Nuestros servicios</h3>
-          <span>Instalación · Configuración · Mantenimiento</span>
+          <h3>Servicios</h3>
+          <span>Lo que hacemos (sin precios)</span>
         </div>
 
         <div class="grid">
-
           <!-- REDES -->
           <article class="service">
-            <img class="img" alt="Redes y Wi-Fi" src="data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-                <defs>
-                  <linearGradient id='g' x1='0' x2='1'>
-                    <stop offset='0' stop-color='%2310b981' stop-opacity='.22'/>
-                    <stop offset='1' stop-color='%230ea5e9' stop-opacity='.20'/>
-                  </linearGradient>
-                </defs>
-                <rect width='1200' height='700' fill='url(%23g)'/>
-                <circle cx='260' cy='330' r='120' fill='%230ea5e9' opacity='.18'/>
-                <circle cx='960' cy='180' r='170' fill='%2310b981' opacity='.16'/>
-                <g fill='none' stroke='%23111827' stroke-opacity='.35' stroke-width='14' stroke-linecap='round'>
-                  <path d='M300 430c60-70 140-70 200 0'/>
-                  <path d='M270 470c90-105 210-105 300 0'/>
-                  <path d='M240 520c120-140 280-140 400 0'/>
-                </g>
-                <g fill='%23111827' opacity='.55'>
-                  <rect x='690' y='360' width='340' height='190' rx='28'/>
-                  <rect x='730' y='405' width='260' height='16' rx='8' fill='%23ffffff' opacity='.55'/>
-                  <rect x='730' y='440' width='220' height='16' rx='8' fill='%23ffffff' opacity='.45'/>
-                  <circle cx='980' cy='505' r='10' fill='%23ffffff' opacity='.7'/>
-                </g>
-                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>REDES</text>
-              </svg>"/>
+            <div class="imgwrap">
+              <img class="img" alt="Redes y Wi-Fi"
+                src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                  <defs>
+                    <linearGradient id='g' x1='0' x2='1'>
+                      <stop offset='0' stop-color='%2319E6C9' stop-opacity='.24'/>
+                      <stop offset='.6' stop-color='%2349A7FF' stop-opacity='.18'/>
+                      <stop offset='1' stop-color='%23A855F7' stop-opacity='.12'/>
+                    </linearGradient>
+                  </defs>
+                  <rect width='1200' height='700' fill='url(%23g)'/>
+                  <g fill='none' stroke='%23EAF0FF' stroke-opacity='.35' stroke-width='16' stroke-linecap='round'>
+                    <path d='M260 450c70-80 160-80 230 0'/>
+                    <path d='M220 500c110-130 260-130 370 0'/>
+                    <path d='M180 560c150-170 360-170 510 0'/>
+                  </g>
+                  <g fill='%23060B14' opacity='.55'>
+                    <rect x='700' y='320' width='360' height='220' rx='28'/>
+                    <rect x='740' y='370' width='260' height='16' rx='8' fill='%23ffffff' opacity='.45'/>
+                    <rect x='740' y='410' width='220' height='16' rx='8' fill='%23ffffff' opacity='.35'/>
+                    <circle cx='1020' cy='505' r='10' fill='%23ffffff' opacity='.55'/>
+                  </g>
+                  <text x='60' y='110' font-family='Arial' font-size='56' fill='%23EAF0FF' opacity='.85'>REDES</text>
+                </svg>" />
+            </div>
             <div class="body">
               <h4>REDES (LAN / Wi-Fi)</h4>
-              <p>Conectividad estable para casas, oficinas y negocios.</p>
+              <p>Conectividad estable y segura para casa, oficina o negocio.</p>
               <ul>
                 <li>Instalación y optimización de Wi-Fi</li>
-                <li>Configuración de routers/switches/AP</li>
+                <li>Configuración de routers / switches / AP</li>
                 <li>Diagnóstico y solución de fallas</li>
-                <li>Orden en rack, etiquetado y buenas prácticas</li>
+                <li>Orden de rack, etiquetado y buenas prácticas</li>
               </ul>
             </div>
             <div class="foot">
@@ -433,36 +726,38 @@
             </div>
           </article>
 
-          <!-- CCTV + NVR -->
+          <!-- CCTV/NVR -->
           <article class="service">
-            <img class="img" alt="CCTV y NVR" src="data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-                <defs>
-                  <linearGradient id='g' x1='0' x2='1'>
-                    <stop offset='0' stop-color='%230ea5e9' stop-opacity='.22'/>
-                    <stop offset='1' stop-color='%2310b981' stop-opacity='.18'/>
-                  </linearGradient>
-                </defs>
-                <rect width='1200' height='700' fill='url(%23g)'/>
-                <circle cx='260' cy='210' r='160' fill='%230ea5e9' opacity='.16'/>
-                <circle cx='980' cy='420' r='200' fill='%2310b981' opacity='.14'/>
-                <g fill='%23111827' opacity='.6'>
-                  <rect x='280' y='260' width='640' height='240' rx='34'/>
-                  <circle cx='600' cy='380' r='88' fill='%23ffffff' opacity='.22'/>
-                  <circle cx='600' cy='380' r='52' fill='%23ffffff' opacity='.22'/>
-                  <circle cx='600' cy='380' r='24' fill='%23ffffff' opacity='.30'/>
-                  <rect x='520' y='510' width='160' height='20' rx='10' fill='%23111827' opacity='.35'/>
-                </g>
-                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>CCTV / NVR</text>
-              </svg>"/>
+            <div class="imgwrap">
+              <img class="img" alt="CCTV y NVR"
+                src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                  <defs>
+                    <linearGradient id='g' x1='0' x2='1'>
+                      <stop offset='0' stop-color='%2349A7FF' stop-opacity='.22'/>
+                      <stop offset='.6' stop-color='%2319E6C9' stop-opacity='.18'/>
+                      <stop offset='1' stop-color='%23A855F7' stop-opacity='.12'/>
+                    </linearGradient>
+                  </defs>
+                  <rect width='1200' height='700' fill='url(%23g)'/>
+                  <g fill='%23060B14' opacity='.56'>
+                    <rect x='270' y='250' width='660' height='270' rx='38'/>
+                    <circle cx='600' cy='385' r='96' fill='%23ffffff' opacity='.18'/>
+                    <circle cx='600' cy='385' r='58' fill='%23ffffff' opacity='.18'/>
+                    <circle cx='600' cy='385' r='28' fill='%23ffffff' opacity='.25'/>
+                    <rect x='520' y='535' width='160' height='22' rx='11' fill='%23060B14' opacity='.35'/>
+                  </g>
+                  <text x='60' y='110' font-family='Arial' font-size='56' fill='%23EAF0FF' opacity='.85'>CCTV / NVR</text>
+                </svg>" />
+            </div>
             <div class="body">
               <h4>CCTV + NVR (Videovigilancia)</h4>
-              <p>Protege tu propiedad con monitoreo y grabación.</p>
+              <p>Monitoreo, grabación y acceso remoto para mayor seguridad.</p>
               <ul>
                 <li>Instalación de cámaras interior/exterior</li>
                 <li>Configuración de NVR y almacenamiento</li>
                 <li>Acceso remoto (celular/PC)</li>
-                <li>Mantenimiento y ajustes</li>
+                <li>Mantenimiento, ajustes y limpieza</li>
               </ul>
             </div>
             <div class="foot">
@@ -471,32 +766,34 @@
             </div>
           </article>
 
-          <!-- CABLEADO -->
+          <!-- Cableado -->
           <article class="service">
-            <img class="img" alt="Cableado estructurado" src="data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-                <defs>
-                  <linearGradient id='g' x1='0' x2='1'>
-                    <stop offset='0' stop-color='%2310b981' stop-opacity='.20'/>
-                    <stop offset='1' stop-color='%230ea5e9' stop-opacity='.16'/>
-                  </linearGradient>
-                </defs>
-                <rect width='1200' height='700' fill='url(%23g)'/>
-                <circle cx='260' cy='520' r='190' fill='%2310b981' opacity='.12'/>
-                <circle cx='980' cy='220' r='170' fill='%230ea5e9' opacity='.14'/>
-                <g fill='none' stroke='%23111827' stroke-opacity='.40' stroke-width='16' stroke-linecap='round'>
-                  <path d='M240 220h320c60 0 90 30 90 90v80c0 60 30 90 90 90h320'/>
-                  <path d='M240 320h260c60 0 90 30 90 90v20c0 60 30 90 90 90h380'/>
-                </g>
-                <g fill='%23111827' opacity='.55'>
-                  <rect x='230' y='160' width='130' height='110' rx='22'/>
-                  <rect x='960' y='470' width='130' height='110' rx='22'/>
-                </g>
-                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>CABLEADO</text>
-              </svg>"/>
+            <div class="imgwrap">
+              <img class="img" alt="Cableado estructurado"
+                src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                  <defs>
+                    <linearGradient id='g' x1='0' x2='1'>
+                      <stop offset='0' stop-color='%2319E6C9' stop-opacity='.20'/>
+                      <stop offset='.6' stop-color='%23A855F7' stop-opacity='.14'/>
+                      <stop offset='1' stop-color='%2349A7FF' stop-opacity='.14'/>
+                    </linearGradient>
+                  </defs>
+                  <rect width='1200' height='700' fill='url(%23g)'/>
+                  <g fill='none' stroke='%23EAF0FF' stroke-opacity='.35' stroke-width='16' stroke-linecap='round'>
+                    <path d='M220 230h340c70 0 110 40 110 110v80c0 70 40 110 110 110h320'/>
+                    <path d='M220 330h280c70 0 110 40 110 110v20c0 70 40 110 110 110h380'/>
+                  </g>
+                  <g fill='%23060B14' opacity='.55'>
+                    <rect x='210' y='165' width='140' height='120' rx='22'/>
+                    <rect x='960' y='470' width='140' height='120' rx='22'/>
+                  </g>
+                  <text x='60' y='110' font-family='Arial' font-size='56' fill='%23EAF0FF' opacity='.85'>CABLEADO</text>
+                </svg>" />
+            </div>
             <div class="body">
               <h4>Cableado Estructurado (Voz y Datos)</h4>
-              <p>Instalación limpia, ordenada y preparada para crecer.</p>
+              <p>Instalación limpia y lista para crecer (orden + documentación).</p>
               <ul>
                 <li>Canalización, charola y tubería</li>
                 <li>Puntos de red / voz / datos</li>
@@ -510,34 +807,36 @@
             </div>
           </article>
 
-          <!-- FIBRA -->
+          <!-- Fibra -->
           <article class="service">
-            <img class="img" alt="Fibra óptica" src="data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-                <defs>
-                  <linearGradient id='g' x1='0' x2='1'>
-                    <stop offset='0' stop-color='%230ea5e9' stop-opacity='.22'/>
-                    <stop offset='1' stop-color='%2310b981' stop-opacity='.15'/>
-                  </linearGradient>
-                </defs>
-                <rect width='1200' height='700' fill='url(%23g)'/>
-                <circle cx='260' cy='190' r='160' fill='%230ea5e9' opacity='.14'/>
-                <circle cx='980' cy='520' r='210' fill='%2310b981' opacity='.12'/>
-                <g stroke='%23111827' stroke-opacity='.40' stroke-width='14' fill='none' stroke-linecap='round'>
-                  <path d='M260 520c240-220 420-260 690-360'/>
-                  <path d='M300 540c260-230 450-270 720-380'/>
-                  <path d='M340 560c280-240 480-280 740-400'/>
-                </g>
-                <g fill='%23111827' opacity='.55'>
-                  <circle cx='960' cy='160' r='18'/>
-                  <circle cx='990' cy='180' r='12'/>
-                  <circle cx='1018' cy='210' r='9'/>
-                </g>
-                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>FIBRA ÓPTICA</text>
-              </svg>"/>
+            <div class="imgwrap">
+              <img class="img" alt="Fibra óptica"
+                src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                  <defs>
+                    <linearGradient id='g' x1='0' x2='1'>
+                      <stop offset='0' stop-color='%2349A7FF' stop-opacity='.22'/>
+                      <stop offset='.6' stop-color='%2319E6C9' stop-opacity='.16'/>
+                      <stop offset='1' stop-color='%23A855F7' stop-opacity='.12'/>
+                    </linearGradient>
+                  </defs>
+                  <rect width='1200' height='700' fill='url(%23g)'/>
+                  <g stroke='%23EAF0FF' stroke-opacity='.35' stroke-width='14' fill='none' stroke-linecap='round'>
+                    <path d='M260 560c260-240 460-290 760-420'/>
+                    <path d='M300 580c280-250 490-300 790-440'/>
+                    <path d='M340 600c300-260 520-310 820-460'/>
+                  </g>
+                  <g fill='%23EAF0FF' opacity='.30'>
+                    <circle cx='980' cy='170' r='18'/>
+                    <circle cx='1012' cy='200' r='12'/>
+                    <circle cx='1040' cy='230' r='9'/>
+                  </g>
+                  <text x='60' y='110' font-family='Arial' font-size='56' fill='%23EAF0FF' opacity='.85'>FIBRA</text>
+                </svg>" />
+            </div>
             <div class="body">
               <h4>Fibra Óptica</h4>
-              <p>Enlaces rápidos y confiables para distancias largas.</p>
+              <p>Enlaces confiables para alta velocidad y largas distancias.</p>
               <ul>
                 <li>Tendido y canalización</li>
                 <li>Terminación y organización</li>
@@ -551,33 +850,35 @@
             </div>
           </article>
 
-          <!-- ALARMAS -->
+          <!-- Alarmas -->
           <article class="service">
-            <img class="img" alt="Alarmas" src="data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-                <defs>
-                  <linearGradient id='g' x1='0' x2='1'>
-                    <stop offset='0' stop-color='%2310b981' stop-opacity='.18'/>
-                    <stop offset='1' stop-color='%230ea5e9' stop-opacity='.18'/>
-                  </linearGradient>
-                </defs>
-                <rect width='1200' height='700' fill='url(%23g)'/>
-                <circle cx='260' cy='520' r='210' fill='%2310b981' opacity='.12'/>
-                <circle cx='980' cy='220' r='170' fill='%230ea5e9' opacity='.14'/>
-                <g fill='%23111827' opacity='.58'>
-                  <path d='M600 170c120 0 220 100 220 220v70H380v-70c0-120 100-220 220-220z'/>
-                  <rect x='470' y='470' width='260' height='90' rx='22'/>
-                  <circle cx='600' cy='515' r='14' fill='%23ffffff' opacity='.45'/>
-                </g>
-                <g stroke='%23111827' stroke-opacity='.35' stroke-width='12' fill='none' stroke-linecap='round'>
-                  <path d='M360 250c-40 50-40 120 0 170'/>
-                  <path d='M840 250c40 50 40 120 0 170'/>
-                </g>
-                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>ALARMAS</text>
-              </svg>"/>
+            <div class="imgwrap">
+              <img class="img" alt="Alarmas"
+                src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                  <defs>
+                    <linearGradient id='g' x1='0' x2='1'>
+                      <stop offset='0' stop-color='%23A855F7' stop-opacity='.16'/>
+                      <stop offset='.55' stop-color='%2319E6C9' stop-opacity='.16'/>
+                      <stop offset='1' stop-color='%2349A7FF' stop-opacity='.14'/>
+                    </linearGradient>
+                  </defs>
+                  <rect width='1200' height='700' fill='url(%23g)'/>
+                  <g fill='%23060B14' opacity='.56'>
+                    <path d='M600 160c140 0 250 110 250 250v70H350v-70c0-140 110-250 250-250z'/>
+                    <rect x='465' y='485' width='270' height='95' rx='22'/>
+                    <circle cx='600' cy='532' r='14' fill='%23ffffff' opacity='.45'/>
+                  </g>
+                  <g stroke='%23EAF0FF' stroke-opacity='.28' stroke-width='12' fill='none' stroke-linecap='round'>
+                    <path d='M340 250c-44 55-44 132 0 188'/>
+                    <path d='M860 250c44 55 44 132 0 188'/>
+                  </g>
+                  <text x='60' y='110' font-family='Arial' font-size='56' fill='%23EAF0FF' opacity='.85'>ALARMAS</text>
+                </svg>" />
+            </div>
             <div class="body">
               <h4>Alarmas</h4>
-              <p>Detección y alertas para mayor seguridad.</p>
+              <p>Detección y alertas: sensores, zonas y configuración.</p>
               <ul>
                 <li>Sensores (movimiento / apertura)</li>
                 <li>Sirenas y panel de control</li>
@@ -591,34 +892,36 @@
             </div>
           </article>
 
-          <!-- CONTROL DE ACCESO -->
+          <!-- Control de acceso -->
           <article class="service">
-            <img class="img" alt="Control de acceso" src="data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-                <defs>
-                  <linearGradient id='g' x1='0' x2='1'>
-                    <stop offset='0' stop-color='%230ea5e9' stop-opacity='.20'/>
-                    <stop offset='1' stop-color='%2310b981' stop-opacity='.16'/>
-                  </linearGradient>
-                </defs>
-                <rect width='1200' height='700' fill='url(%23g)'/>
-                <circle cx='260' cy='210' r='170' fill='%230ea5e9' opacity='.14'/>
-                <circle cx='980' cy='520' r='210' fill='%2310b981' opacity='.12'/>
-                <g fill='%23111827' opacity='.58'>
-                  <rect x='420' y='170' width='360' height='440' rx='40'/>
-                  <rect x='470' y='230' width='260' height='80' rx='20' fill='%23ffffff' opacity='.18'/>
-                  <circle cx='600' cy='390' r='60' fill='%23ffffff' opacity='.18'/>
-                  <rect x='520' y='470' width='160' height='24' rx='12' fill='%23ffffff' opacity='.18'/>
-                </g>
-                <g fill='%23111827' opacity='.40'>
-                  <circle cx='600' cy='390' r='14'/>
-                  <rect x='592' y='405' width='16' height='26' rx='8'/>
-                </g>
-                <text x='60' y='110' font-family='Arial' font-size='54' fill='%23111827' opacity='.85'>CONTROL DE ACCESO</text>
-              </svg>"/>
+            <div class="imgwrap">
+              <img class="img" alt="Control de acceso"
+                src="data:image/svg+xml;utf8,
+                <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
+                  <defs>
+                    <linearGradient id='g' x1='0' x2='1'>
+                      <stop offset='0' stop-color='%2349A7FF' stop-opacity='.20'/>
+                      <stop offset='.6' stop-color='%2319E6C9' stop-opacity='.16'/>
+                      <stop offset='1' stop-color='%23A855F7' stop-opacity='.12'/>
+                    </linearGradient>
+                  </defs>
+                  <rect width='1200' height='700' fill='url(%23g)'/>
+                  <g fill='%23060B14' opacity='.56'>
+                    <rect x='420' y='150' width='360' height='470' rx='44'/>
+                    <rect x='470' y='220' width='260' height='86' rx='22' fill='%23ffffff' opacity='.16'/>
+                    <circle cx='600' cy='385' r='68' fill='%23ffffff' opacity='.16'/>
+                    <rect x='520' y='475' width='160' height='26' rx='13' fill='%23ffffff' opacity='.14'/>
+                  </g>
+                  <g fill='%23EAF0FF' opacity='.28'>
+                    <circle cx='600' cy='385' r='14'/>
+                    <rect x='592' y='404' width='16' height='28' rx='8'/>
+                  </g>
+                  <text x='60' y='110' font-family='Arial' font-size='56' fill='%23EAF0FF' opacity='.85'>ACCESO</text>
+                </svg>" />
+            </div>
             <div class="body">
               <h4>Control de Acceso</h4>
-              <p>Entradas con permisos, horarios y control.</p>
+              <p>Permisos, horarios y control de entradas para tu espacio.</p>
               <ul>
                 <li>Chapas eléctricas/magnéticas</li>
                 <li>Lectores (tarjeta / PIN / biométrico)</li>
@@ -631,15 +934,13 @@
               <a class="info" href="#contacto">INFO</a>
             </div>
           </article>
-
         </div>
       </section>
 
-      <!-- ABOUT -->
       <section id="nosotros">
         <div class="section-title">
           <h3>Nosotros</h3>
-          <span>Atención clara y trabajo profesional</span>
+          <span>Profesional, claro y confiable</span>
         </div>
 
         <div class="grid">
@@ -654,14 +955,13 @@
           <article class="about">
             <h4>Visión</h4>
             <p>
-              Ser una empresa reconocida por la calidad de instalación, organización del trabajo y servicio al cliente
+              Ser una empresa reconocida por la calidad de instalación, la organización del trabajo y el servicio al cliente
               en proyectos de redes, seguridad y conectividad.
             </p>
           </article>
         </div>
       </section>
 
-      <!-- TRUST TILES -->
       <section>
         <div class="section-title">
           <h3>Lo que cuidamos en cada proyecto</h3>
@@ -675,25 +975,24 @@
             <small>Canalización, orden y buena presentación.</small>
           </div>
           <div class="tile">
-            <div class="icon">🛠️</div>
+            <div class="icon">🧠</div>
             <strong>Configuración correcta</strong>
             <small>Usuarios, permisos, acceso remoto y estabilidad.</small>
           </div>
           <div class="tile">
-            <div class="icon">🧩</div>
-            <strong>Soporte y mantenimiento</strong>
-            <small>Prevención, ajustes y solución de fallas.</small>
+            <div class="icon">🛠️</div>
+            <strong>Soporte</strong>
+            <small>Mantenimiento preventivo y solución de fallas.</small>
           </div>
         </div>
       </section>
 
-      <!-- FINAL CTA -->
       <section class="hero" style="padding:20px 18px">
-        <div class="hero-grid" style="grid-template-columns: 1.2fr .8fr">
+        <div class="hero-grid" style="grid-template-columns: 1.15fr .85fr">
           <div>
             <h2 style="font-size:26px;margin:0 0 8px">¿Listo para mejorar tu seguridad y conectividad?</h2>
             <p style="margin:0;color:var(--muted)">
-              Dinos qué necesitas (red, cámaras, fibra, alarma o acceso) y te orientamos para armar la mejor solución.
+              Escríbenos y te orientamos según tu espacio (hogar, negocio o empresa).
             </p>
           </div>
           <div class="btnrow" style="justify-content:flex-end; align-items:center">
@@ -706,11 +1005,45 @@
       <footer>
         <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center">
           <div><b style="color:var(--text)">180• services pro</b> · Infraestructura tecnológica</div>
-          <div>REDES · NVR · CCTV · Cableado · Voz y Datos · Fibra Óptica · Alarmas · Control de Acceso</div>
+          <div>REDES · NVR · CCTV · Cableado · Voz y Datos · Fibra · Alarmas · Acceso</div>
         </div>
       </footer>
-
     </main>
   </div>
+
+  <!-- Floating WhatsApp -->
+  <a class="float-wa" href="https://wa.me/5210000000000?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20180%E2%80%A2%20services%20pro." aria-label="WhatsApp">
+    <span class="wa-dot" aria-hidden="true"></span>
+    <span>WhatsApp</span>
+    <span aria-hidden="true">💬</span>
+  </a>
+
+  <script>
+    // Scroll reveal
+    const items = [...document.querySelectorAll('.service, .about, .tile')];
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach((e)=>{
+        if(e.isIntersecting){
+          e.target.classList.add('reveal');
+          io.unobserve(e.target);
+        }
+      });
+    }, {threshold: 0.18});
+    items.forEach(el => io.observe(el));
+
+    // Light parallax for hero blobs (nice but subtle)
+    const hero = document.querySelector('.hero');
+    const blobs = [...document.querySelectorAll('.blob')];
+    window.addEventListener('mousemove', (ev)=>{
+      if(!hero) return;
+      const r = hero.getBoundingClientRect();
+      const x = (ev.clientX - (r.left + r.width/2)) / r.width;
+      const y = (ev.clientY - (r.top + r.height/2)) / r.height;
+      blobs.forEach((b, i)=>{
+        const k = (i+1) * 10;
+        b.style.transform = `translate3d(${x*k}px, ${y*k}px, 0)`;
+      });
+    }, {passive:true});
+  </script>
 </body>
 </html>
